@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Les Enfants · Bot de redes: instalación y estrategia</title>
+<meta name="description" content="Cómo se instala el bot de redes de Les Enfants en Claude y cuál es la estrategia para Instagram, TikTok, Facebook y Google.">
+<link rel="icon" href="logo-badge.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,600;0,6..96,700;1,6..96,500&family=Figtree:wght@400;500;600;700;800&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+:root{--mint:#d8eee3;--mint2:#c5e5d6;--teal:#0e6361;--teal-d:#0a4a49;--gold:#c2a24d;--gold-t:#7d6227;--ink:#14142b;--paper:#fbfaf5;--rose:#f6d3dc;--lilac:#e3dbf3;--butter:#f7ecc4;--body:#33334a;--line:#dfe9e3;
+--holo:linear-gradient(90deg,#0e6361,#43b9b8 22%,#7b5cd6 48%,#d24b9a 72%,#c2a24d);--disp:"Bodoni Moda",Didot,Georgia,serif;--sans:"Figtree",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--paper);color:var(--body);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:var(--teal)}
+code{font:600 .9em/1 ui-monospace,Consolas,monospace;background:var(--mint);padding:2px 6px;border-radius:6px;color:var(--teal-d);word-break:break-word}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+.holo{height:6px;background:var(--holo)}
+.eyebrow{font:800 13px/1.3 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--gold-t)}
+h1,h2,h3{font-family:var(--disp);color:var(--teal);font-weight:700;line-height:1.04;letter-spacing:-.01em}
+h1 em,h2 em,h3 em{font-style:italic;font-weight:500;color:var(--ink)}
+h2{font-size:clamp(34px,5.6vw,58px);margin:10px 0 18px}
+h3{font-size:26px}
+p+p{margin-top:12px}
+.oct{--s:118px;width:var(--s);height:var(--s);flex:none;background:#111;position:relative;clip-path:polygon(29.3% 0,70.7% 0,100% 29.3%,100% 70.7%,70.7% 100%,29.3% 100%,0 70.7%,0 29.3%);transform:rotate(-7deg);filter:drop-shadow(0 10px 14px rgba(20,20,43,.25))}
+.oct::before{content:"";position:absolute;inset:calc(var(--s)*.045);background:#fff;clip-path:inherit}
+.oct::after{content:"";position:absolute;inset:calc(var(--s)*.065);background:#111;clip-path:inherit}
+.oct span{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 14%;color:#fff;font:800 calc(var(--s)*.1)/1.1 var(--sans);text-transform:uppercase}
+
+.hero{background:var(--mint);padding:28px 0 52px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{width:56px;height:56px;border-radius:50%;box-shadow:0 0 0 2px var(--gold)}
+.brand b{font:400 34px/1 "Parisienne",cursive;color:var(--teal)}
+.brand small{display:block;font:700 11px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-t);margin-top:4px}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end;margin-top:40px}
+.hero h1{font-size:clamp(44px,8vw,88px);margin:14px 0 20px}
+.lead{font-size:19px;max-width:640px;color:#2a2a40}
+.hero .oct{--s:180px}
+
+nav.toc{position:sticky;top:0;z-index:5;background:rgba(251,250,245,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.toc a{flex:none;text-decoration:none;font:700 14px/1 var(--sans);color:var(--teal);padding:10px 14px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+nav.toc a:hover{background:var(--mint)}
+
+section.part{padding:64px 0 8px}
+
+/* qué es */
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.box{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px}
+.box .num{font:700 40px/1 var(--disp);color:var(--gold)}
+.box h3{font-size:24px;margin:8px 0 8px}
+.box p{font-size:16px}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:20px;font:700 15px/1 var(--sans);color:var(--teal)}
+.chain span{background:var(--mint);padding:10px 14px;border-radius:999px}
+.chain i{font-style:normal;color:var(--gold)}
+.note{margin-top:20px;background:var(--butter);border-radius:18px;padding:16px 18px;color:#4a3a10;font-size:16px}
+.note b{color:#7a5a12}
+
+/* instalación */
+.progress{display:flex;align-items:center;gap:14px;margin:6px 0 22px}
+.bar{flex:1;height:10px;background:var(--mint);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--teal);transition:width .3s}
+.progress b{font:800 14px/1 var(--sans);color:var(--teal);white-space:nowrap}
+.step{background:#fff;border:1px solid var(--line);border-radius:22px;margin-top:14px;overflow:hidden}
+.step summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:48px 1fr auto;gap:14px;align-items:center;padding:18px 20px}
+.step summary::-webkit-details-marker{display:none}
+.step .n{width:48px;height:48px;border-radius:50%;background:var(--mint2);display:flex;align-items:center;justify-content:center;font:700 22px/1 var(--disp);color:var(--teal)}
+.step.done .n{background:var(--teal);color:#fff}
+.step h3{font:800 19px/1.25 var(--sans);color:var(--ink)}
+.step .who{display:block;font:600 13px/1.3 var(--sans);color:var(--gold-t);margin-top:3px}
+.step .chev{font:700 20px/1 var(--sans);color:var(--gold);transition:transform .2s}
+.step[open] .chev{transform:rotate(45deg)}
+.step .body{padding:0 20px 20px 82px}
+.step .why{font-size:16px;margin-bottom:10px;color:#4a4a60}
+.check{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px solid #f0f3f1;font-size:16px;cursor:pointer}
+.check input{appearance:none;flex:none;width:24px;height:24px;margin-top:1px;border:2px solid var(--teal);border-radius:7px;display:grid;place-items:center;cursor:pointer;background:#fff}
+.check input:checked{background:var(--teal)}
+.check input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.check input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.check input:checked+span{color:#8a9a93;text-decoration:line-through;text-decoration-color:#b9c9c2}
+.reset{margin-top:16px;background:none;border:0;font:700 14px/1 var(--sans);color:var(--gold-t);text-decoration:underline;cursor:pointer}
+
+/* estrategia */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px}
+.stat b{display:block;font:700 34px/1 var(--disp);color:var(--teal)}
+.stat span{display:block;font-size:14px;line-height:1.4;margin-top:8px}
+.stat.hot{background:var(--teal);border-color:var(--teal);color:#d6ebe4}.stat.hot b{color:var(--butter)}
+.big{margin-top:22px;font:600 22px/1.4 var(--sans);color:var(--ink);max-width:720px}
+.big em{font-style:normal;color:var(--teal);background:linear-gradient(transparent 62%,var(--butter) 62%)}
+.goals{list-style:none;margin-top:16px;display:grid;gap:10px}
+.goals li{background:#fff;border-left:5px solid var(--teal);border-radius:0 16px 16px 0;padding:14px 18px}
+.goals li b{color:var(--teal)}
+table{width:100%;border-collapse:collapse;margin-top:18px;font-size:16px;background:#fff;border-radius:18px;overflow:hidden}
+th,td{text-align:left;padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:800 12px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-t);background:var(--mint)}
+td b{color:var(--teal)}
+.pct{font:700 22px/1 var(--disp);color:var(--teal);white-space:nowrap}
+.nets{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.net{border-radius:22px;padding:20px;background:#fff;border:1px solid var(--line)}
+.net h3{font-size:24px;margin-bottom:8px}
+.net ul{margin-left:18px;font-size:16px;display:grid;gap:6px}
+.journey{list-style:none;counter-reset:j;display:grid;gap:10px;margin-top:18px}
+.journey li{counter-increment:j;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px}
+.journey li::before{content:counter(j);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--rose);font:700 20px/1 var(--disp);color:var(--teal)}
+.journey li:nth-child(2)::before{background:var(--lilac)}.journey li:nth-child(3)::before{background:var(--butter)}.journey li:nth-child(4)::before{background:var(--mint2)}
+.ideas{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.idea{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px}
+.idea .k{font:700 34px/1 var(--disp);color:var(--gold)}
+.idea h3{font-size:22px;margin:6px 0 8px}
+.idea p{font-size:16px}
+.cal{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.cal div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;font-size:15px}
+.cal b{display:block;font:700 20px/1.1 var(--disp);color:var(--teal);margin-bottom:6px}
+.cal .gold{background:var(--teal);color:#d6ebe4;border-color:var(--teal)}.cal .gold b{color:var(--butter)}
+
+/* uso */
+.phrases{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+.ph{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px}
+.ph q{display:block;font:700 italic 24px/1.15 var(--disp);color:var(--teal);quotes:"“" "”"}
+.ph p{font-size:15px;margin-top:8px}
+.her{margin-top:22px;background:var(--teal);color:#e2f0eb;border-radius:24px;padding:24px 26px}
+.her h3{color:#fff}.her h3 em{color:var(--butter)}
+.her ul{margin:12px 0 0 20px;display:grid;gap:8px}
+
+footer{margin-top:70px;background:var(--teal-d);color:#cfe3dc;padding:34px 0 42px;font-size:15px}
+footer a{color:var(--butter)}
+
+@media (max-width:760px){
+  body{font-size:16px}
+  .hero-grid{grid-template-columns:1fr}.hero .oct{--s:110px;justify-self:end}
+  .flow,.nets,.ideas,.phrases{grid-template-columns:1fr}
+  .stats,.cal{grid-template-columns:1fr 1fr}
+  .step summary{grid-template-columns:40px 1fr auto;padding:16px}
+  .step .n{width:40px;height:40px;font-size:19px}
+  .step .body{padding:0 16px 18px}
+  table{font-size:15px}th,td{padding:11px 10px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar i,.step .chev{transition:none}}
+</style>
+</head>
+<body>
+<div class="holo"></div>
+<header class="hero">
+  <div class="wrap">
+    <div class="brand"><img src="logo-badge.webp" alt="Logo de Les Enfants" width="56" height="56"><div><b>Les Enfants</b><small>Bot de redes · Tranquera Digital</small></div></div>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Instalación y estrategia</p>
+        <h1>Tu equipo de redes, <em>dentro de Claude</em></h1>
+        <p class="lead">Cómo se instala el bot, paso a paso, y qué vamos a hacer con Instagram, TikTok, Facebook y Google para que las redes traigan gente al local de Juncal 1267.</p>
+      </div>
+      <div class="oct" aria-hidden="true"><span>Alto nivel en redes</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Secciones"><div class="wrap">
+  <a href="#que-es">Qué es</a><a href="#instalacion">Instalación</a><a href="#estrategia">Estrategia</a><a href="#ano">El año</a><a href="#uso">Cómo se usa</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="part" id="que-es">
+  <p class="eyebrow">Qué es</p>
+  <h2>Tres piezas, <em>cero programación</em></h2>
+  <p>El bot es Claude (la inteligencia artificial de Anthropic) con todo lo que sabemos de Les Enfants cargado adentro. Le escribís como a una persona, desde el celular o la compu, y te devuelve el plan, las placas listas para subir, los textos y las respuestas.</p>
+  <div class="flow">
+    <div class="box"><div class="num">1</div><h3>El Proyecto</h3><p>Una carpeta dentro de Claude llamada "Les Enfants · Redes". Tiene las instrucciones (cómo trabaja) y 5 archivos: la marca y cómo hablamos, la estrategia, cómo se arma cada formato, el calendario del año y las respuestas armadas.</p></div>
+    <div class="box"><div class="num">2</div><h3>Las habilidades</h3><p>Dos "manuales de tareas" que Claude usa solo: <b>les-enfants-cm</b> (planificar, editar un video, historias, contestar, programar, medir) y <b>les-enfants-piezas</b> (arma las placas en PNG con tus colores, tus letras y el octágono).</p></div>
+    <div class="box"><div class="num">3</div><h3>Los conectores</h3><p><b>Metricool</b> programa en Instagram, TikTok, Facebook y la ficha de Google, y trae las estadísticas. <b>Canva</b> es opcional, para quien quiera retocar las placas a mano.</p></div>
+  </div>
+  <div class="chain" aria-label="Cómo circula el trabajo"><span>Vos: "armá el plan"</span><i>→</i><span>Plan de 15 días</span><i>→</i><span>Tu OK</span><i>→</i><span>Placas, textos y guiones</span><i>→</i><span>Tu OK</span><i>→</i><span>Metricool programa</span></div>
+  <p class="note"><b>No hace falta crear una app de Meta ni pedir permisos a TikTok.</b> TikTok publica en privado todo lo que sale de una app que no pasó su revisión, y Meta exige otra revisión. Metricool ya tiene esos permisos y tiene conector oficial en Claude: se conecta con tu usuario y listo.</p>
+</section>
+
+<section class="part" id="instalacion">
+  <p class="eyebrow">Instalación · 1 hora y media, juntos</p>
+  <h2>Paso a paso, <em>con tildes</em></h2>
+  <p>Mejor hacerlo en el local o por videollamada compartiendo pantalla. Los tildes quedan guardados en este navegador, así se puede cortar y seguir otro día.</p>
+  <div class="progress"><div class="bar"><i id="bar"></i></div><b id="count">0 de 0</b></div>
+  <div id="steps"></div>
+  <button class="reset" type="button" id="reset">Borrar todos los tildes</button>
+</section>
+
+<section class="part" id="estrategia">
+  <p class="eyebrow">La estrategia</p>
+  <h2>Publicar seguido ya lo hacen. <em>Hay que cambiar qué.</em></h2>
+  <div class="stats">
+    <div class="stat"><b>6.468</b><span>seguidores en Instagram</span></div>
+    <div class="stat"><b>≈10</b><span>likes de promedio por posteo (0,2 %)</span></div>
+    <div class="stat hot"><b>2.953</b><span>likes del reel del Día del Estudiante: 300 veces el promedio</span></div>
+    <div class="stat"><b>5,0 ★</b><span>en Google, con 59 reseñas</span></div>
+  </div>
+  <p class="big">El reel que explotó no vendía nada: mostraba a chicos estudiando con mate y resaltadores, y la gente se vio reflejada. Lo que peor anda son las <em>placas de catálogo con fotos del proveedor</em>. La cuenta tiene que mostrar el local, a la dueña y a los clientes.</p>
+
+  <h3 style="margin-top:40px">El objetivo</h3>
+  <ul class="goals">
+    <li><b>El que importa:</b> más consultas por WhatsApp y mensaje privado que terminan en una venta, un envío o una visita al local.</li>
+    <li><b>A 6 meses (mayo 2027):</b> pasar de 0,2 % a 1 % de interacción (unos 60 likes de promedio sin sorteos), 1 reel por mes que llegue a gente que no nos sigue, y carruseles que se guardan y se comparten.</li>
+    <li><b>Todo apunta a febrero y marzo:</b> la vuelta a clases es la temporada de oro. Lo que hacemos de noviembre a enero es para llegar ahí con gente que ya nos conoce y una lista de difusión armada.</li>
+  </ul>
+
+  <h3 style="margin-top:40px">Qué publicamos, en qué proporción</h3>
+  <table>
+    <thead><tr><th>Pilar</th><th>%</th><th>Qué es</th></tr></thead>
+    <tbody>
+      <tr><td><b>La vida en el local</b></td><td class="pct">35 %</td><td>Lo que pasa en el mostrador: "Cosas que nos vienen a pedir", un pedido armado de punta a punta, el caos de marzo.</td></tr>
+      <tr><td><b>¿Vale la pena?</b></td><td class="pct">25 %</td><td>La dueña prueba un producto a cámara y dice la verdad, aunque no convenga. Ya lo hicieron con los marcadores al alcohol.</td></tr>
+      <tr><td><b>Regalos resueltos</b></td><td class="pct">20 %</td><td>Ideas por persona y presupuesto, con precio: para la seño, cumple de 6 años, amigo invisible.</td></tr>
+      <tr><td><b>Temporadas y listas</b></td><td class="pct">10 %</td><td>Agendas, listas del colegio, fin de año. "Mandanos la lista y te la armamos".</td></tr>
+      <tr><td><b>La familia y los octágonos</b></td><td class="pct">10 %</td><td>Por qué "Les Enfants", los carteles de la vidriera, quiénes atienden.</td></tr>
+    </tbody>
+  </table>
+  <p class="note"><b>Regla de oro:</b> si una pieza sirve igual para cualquier librería del país, se rehace. Tiene que tener algo que solo tiene Les Enfants: la dueña, el local, los octágonos, Juncal 1267, una frase de un cliente.</p>
+
+  <h3 style="margin-top:40px">Cómo funciona cada red</h3>
+  <div class="nets">
+    <div class="net"><h3>Instagram</h3><ul><li><b>Reels:</b> la única forma de llegar a gente que no te sigue. Deciden los primeros 3 segundos y cuántos lo mandan por mensaje a otra persona.</li><li><b>Carruseles:</b> lo que más se guarda. Una guía con precios vuelve a aparecer.</li><li><b>Historias:</b> la vidriera diaria para los que ya te siguen. Venden.</li><li>Nunca subir un video con marca de agua de TikTok o CapCut: Instagram lo muestra menos.</li></ul></div>
+    <div class="net"><h3>TikTok</h3><ul><li>Funciona como buscador: "librería Recoleta", "agenda 2027", "lista de útiles". Esas palabras van dichas, escritas en pantalla y en la descripción.</li><li>Premia lo crudo y la tendencia del momento. Ahí están los chicos, que después les piden a los padres.</li><li>Mismos videos que Instagram, subidos aparte y limpios, más 1 o 2 extra rápidos.</li></ul></div>
+    <div class="net"><h3>Facebook</h3><ul><li>Público más grande: abuelas y abuelos que compran regalos.</li><li>Se publica lo mismo que en Instagram, sin trabajo extra.</li><li>La página habilita Meta Business Suite: mensajes de las dos redes juntos y, algún día, publicidad.</li></ul></div>
+    <div class="net"><h3>Google</h3><ul><li>La ficha de Maps es donde te encuentran los que buscan "librería cerca".</li><li>Cada 15 días, una publicación ahí (la tapa del carrusel de la quincena).</li><li>Las reseñas son el mejor argumento: pedirlas con un QR en el mostrador y en cada bolsa de envío.</li></ul></div>
+  </div>
+
+  <h3 style="margin-top:40px">El camino de un cliente</h3>
+  <ol class="journey">
+    <li><div><b>Te descubre</b> con un reel o un TikTok que habla de su vida (la lista, el cumple, marzo).</div></li>
+    <li><div><b>Mira el perfil:</b> bio clara, tres fijados (quiénes somos, cómo comprar, lo de esta semana) y destacadas ordenadas.</div></li>
+    <li><div><b>Se decide</b> con un carrusel con precios, una historia de "llegó hoy" o una reseña.</div></li>
+    <li><div><b>Te escribe</b> y recibe una respuesta rápida: "te lo separamos". El bot te deja la respuesta lista para copiar.</div></li>
+    <li><div><b>Vuelve y te recomienda:</b> lista de difusión, reseña en Google, una historia con su compra.</div></li>
+  </ol>
+
+  <h3 style="margin-top:40px">El ritmo de cada semana</h3>
+  <table>
+    <thead><tr><th>Qué</th><th>Cuántos</th><th>Detalle</th></tr></thead>
+    <tbody>
+      <tr><td><b>Reels</b></td><td class="pct">2</td><td>Uno del local o la familia y uno de "¿Vale la pena?" o un producto en la mano. Van también a TikTok y Facebook.</td></tr>
+      <tr><td><b>Carruseles</b></td><td class="pct">2</td><td>Los que se guardan: regalos con precio, listas, comparativas.</td></tr>
+      <tr><td><b>Historias</b></td><td class="pct">5 días</td><td>3 a 5 por día: llegó hoy, encuesta, "te lo separamos", horarios.</td></tr>
+      <tr><td><b>Google</b></td><td class="pct">1 cada 15 días</td><td>La misma imagen del carrusel principal.</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:12px;font-size:15px">Reels y carruseles a las 19 (salida del trabajo y del cole); historias a las 10, cuando abre el local. Se ajusta con las estadísticas después de 4 semanas.</p>
+
+  <h3 style="margin-top:40px">Ocho ideas para que la cuenta la rompa</h3>
+  <div class="ideas">
+    <div class="idea"><div class="k">1</div><h3>Series con número</h3><p>"Cosas que nos vienen a pedir #2", "¿Vale la pena? #1", "El octágono de la semana". La gente vuelve por la serie, no por el posteo.</p></div>
+    <div class="idea"><div class="k">2</div><h3>Mandanos la lista y te la armamos</h3><p>El servicio estrella de diciembre a marzo: la foto de la lista por WhatsApp y la bolsa lista para retirar o para enviar.</p></div>
+    <div class="idea"><div class="k">3</div><h3>El caos de marzo, con humor</h3><p>El primer día de clases contado desde el mostrador. Es el formato del reel que explotó: la gente se ve reflejada.</p></div>
+    <div class="idea"><div class="k">4</div><h3>Las marcas, de socias</h3><p>Etiquetar a Mooving, Filgo, Kiruki y AE en cada video. Cuando uno anda bien, escribirles para compartirlo o hacer un sorteo con premio de ellos.</p></div>
+    <div class="idea"><div class="k">5</div><h3>Sorteos que traen clientes</h3><p>En vez de "etiquetá a 3 amigos": "contanos qué útil no puede faltar en la cartuchera de tu hijo". Los comentarios se vuelven ideas para los próximos posteos.</p></div>
+    <div class="idea"><div class="k">6</div><h3>Novedades por WhatsApp</h3><p>Una lista de difusión a la que se anota quien quiere. Un mensaje por semana, como mucho. En marzo vale oro.</p></div>
+    <div class="idea"><div class="k">7</div><h3>Reseñas con QR</h3><p>Un cartelito en el mostrador y una tarjeta en cada envío. Cada reseña nueva sube la ficha en Google.</p></div>
+    <div class="idea"><div class="k">8</div><h3>Publicidad chiquita, después</h3><p>Cuando un reel anda bien solo, se promociona 5 a 7 días a 3 km del local. Nunca se paga por algo que no funcionó solo.</p></div>
+  </div>
+
+  <h3 style="margin-top:40px">Cómo medimos (cada 15 días)</h3>
+  <table>
+    <thead><tr><th>Número</th><th>Dónde se ve</th></tr></thead>
+    <tbody>
+      <tr><td><b>Consultas que nombraron una publicación</b></td><td>Una rayita en un papel junto a la caja cada vez que alguien dice "lo vi en Instagram".</td></tr>
+      <tr><td><b>Cuentas alcanzadas que no te siguen</b></td><td>Estadísticas de Instagram o Metricool.</td></tr>
+      <tr><td><b>Compartidos y guardados</b></td><td>De las 4 mejores piezas de la quincena.</td></tr>
+      <tr><td><b>Vistas del mejor TikTok</b></td><td>TikTok Studio o Metricool.</td></tr>
+      <tr><td><b>Reseñas nuevas en Google</b></td><td>Ficha de Google.</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:12px;font-size:15px">Con eso se deciden tres cosas: qué repetimos, qué dejamos y qué probamos. Nunca se juzga una pieza sola: se mira la tendencia de 2 o 3 quincenas.</p>
+</section>
+
+<section class="part" id="ano">
+  <p class="eyebrow">El año, de un vistazo</p>
+  <h2>Todo apunta <em>a marzo</em></h2>
+  <div class="cal">
+    <div><b>Noviembre</b>Agendas 2027 (20% OFF), regalos para la seño, "Mandanos la lista".</div>
+    <div><b>Diciembre</b>Amigo invisible, fin de clases, Navidad. Llegan las listas 2027.</div>
+    <div><b>Enero</b>Vacaciones: arte, juegos de mesa, envíos al interior y a la costa.</div>
+    <div class="gold"><b>Febrero y marzo</b>Vuelta a clases: listas armadas, el caos de marzo, la lista de difusión.</div>
+    <div><b>Abril a julio</b>Pascuas y vacaciones de invierno: arte, juegos de mesa y planes para los chicos.</div>
+    <div><b>Agosto</b>Día del Niño: la segunda fecha más fuerte del año.</div>
+    <div><b>Septiembre</b>Día del Estudiante (el del reel que explotó) y primavera.</div>
+    <div><b>Octubre</b>Día de la Madre y Halloween. Sorteo con una marca.</div>
+  </div>
+  <p style="margin-top:12px;font-size:15px">El detalle mes por mes y un banco de 35 ideas están dentro del bot (archivo 04).</p>
+</section>
+
+<section class="part" id="uso">
+  <p class="eyebrow">Cómo se usa</p>
+  <h2>Con ocho frases <em>alcanza</em></h2>
+  <p>Siempre dentro del Proyecto "Les Enfants · Redes", desde el celular o la compu.</p>
+  <div class="phrases">
+    <div class="ph"><q>Arranquemos</q><p>La primera vez: te hace preguntas para conocerte. Podés contestar con audios.</p></div>
+    <div class="ph"><q>Armá el plan</q><p>Cada 15 días: qué publicar día por día y qué tenés que mandarle. Nada se hace hasta que digas que sí.</p></div>
+    <div class="ph"><q>Tengo este video</q><p>Subís fotos o videos del local y te dice cómo editarlo, qué texto va en pantalla y el texto del posteo.</p></div>
+    <div class="ph"><q>Carrusel de…</q><p>"Carrusel de regalos para la seño": te arma las placas en PNG, listas para subir, con tus fotos.</p></div>
+    <div class="ph"><q>Historias de hoy</q><p>Qué foto sacar, el texto de cada historia y el del sticker.</p></div>
+    <div class="ph"><q>Contestá esto</q><p>Pegás un mensaje, un comentario o una reseña y te deja la respuesta lista para copiar.</p></div>
+    <div class="ph"><q>Programalo</q><p>Con las piezas aprobadas, las deja programadas en Instagram, TikTok y Facebook.</p></div>
+    <div class="ph"><q>¿Cómo nos fue?</q><p>Cada 15 días: los números que importan y 3 decisiones para la quincena siguiente.</p></div>
+  </div>
+  <div class="her">
+    <h3>Lo que hacés vos <em>sí o sí</em></h3>
+    <ul>
+      <li><b>Filmar:</b> 2 minutos, 2 o 3 veces por semana. El bot no filma; te dice exactamente qué grabar.</li>
+      <li><b>Elegir la música</b> al subir un reel o un carrusel, y poner los stickers de las historias (el bot te deja el texto).</li>
+      <li><b>Contestar rápido</b> los mensajes. Un mensaje contestado en 2 horas vende más que cualquier posteo.</li>
+      <li><b>Anotar</b> con una rayita cada vez que alguien dice "lo vi en Instagram".</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Hecho por Tranquera Digital para Les Enfants Librería Boutique, Juncal 1267, Recoleta. ¿Querés ver lo que se publica cada día? <a href="https://borthaburutoribio.github.io/lesenfants-propuesta-instagram/">Plan del 9 al 22 de noviembre</a>.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var STEPS=[
+    ["Antes del día de la instalación","Toribio, por WhatsApp",null,[
+      "Que tenga a mano el celular con Instagram y TikTok abiertos, su Facebook personal y el mail que quiere usar para Claude.",
+      "Que tenga la tarjeta para la suscripción: la carga ella, nadie más toca datos de pago.",
+      "Confirmar que el código de verificación de Instagram le llega a ella.",
+      "Llevar la carpeta del bot (pendrive o Drive): instrucciones, archivos 01 a 05 y las dos habilidades en .zip."]],
+    ["Cuenta de Claude","Ella, con Toribio guiando · 10 min",null,[
+      "Entrar a claude.ai y crear la cuenta con su mail.",
+      "Pasar al plan Pro (Configuración → Facturación).",
+      "Instalar la app de Claude en el celular (y en la compu del local, si hay) e iniciar sesión.",
+      "Configuración → Capacidades: activar \"Ejecución de código y creación de archivos\". Sin esto, las habilidades no funcionan."]],
+    ["Subir las dos habilidades","Toribio · 5 min","Las habilidades son los manuales de tareas. Claude las usa solo cuando hace falta.",[
+      "Ir a Personalizar → Habilidades (en algunas versiones: Configuración → Capacidades → Habilidades).",
+      "\"+\" → \"Subir una habilidad\" → les-enfants-cm.zip.",
+      "Repetir con les-enfants-piezas.zip (la que arma las placas).",
+      "Confirmar que las dos aparecen activadas."]],
+    ["Crear el Proyecto","Toribio · 10 min","El Proyecto es la carpeta donde vive todo lo que el bot sabe de Les Enfants.",[
+      "Proyectos → Nuevo proyecto → nombre \"Les Enfants · Redes\".",
+      "Instrucciones del proyecto: pegar el texto del archivo 1-instrucciones-del-proyecto.md.",
+      "Archivos del proyecto: subir los 5 archivos de la carpeta conocimiento (01 a 05).",
+      "Prueba: abrir un chat en el Proyecto y escribir \"¿Qué sabés de Les Enfants?\". Tiene que nombrar Juncal 1267, los octágonos y los pilares."]],
+    ["Instagram","Ella, en el celular · 10 min",null,[
+      "Confirmar que la cuenta es profesional de Empresa (Configuración → Tipo de cuenta y herramientas). Categoría: Librería.",
+      "Ordenar el perfil: link nuevo (librerialesenfants.com), un solo WhatsApp, bio nueva y nombre \"Les Enfants · Librería Recoleta\".",
+      "Subir las 6 portadas de destacadas y fijar el posteo \"Cómo comprar\" (están en la página del plan).",
+      "Botones de contacto: WhatsApp y dirección, para que aparezca \"Cómo llegar\".",
+      "Verificación en dos pasos activada en su celular."]],
+    ["Página de Facebook y Meta Business Suite","Ella, con Toribio · 15 min · recomendado","Una página (no un perfil) suma el público de las abuelas que compran regalos, junta los mensajes de las dos redes y deja programar gratis desde Meta Business Suite.",[
+      "Desde su Facebook personal: Páginas → Crear página → \"Les Enfants Librería Boutique\", categoría Librería. Foto: el osito. Portada: la vidriera.",
+      "Vincular Instagram a la página (Configuración → Cuentas vinculadas, o desde el Centro de cuentas).",
+      "Entrar a business.facebook.com y confirmar que la página y el Instagram están en el mismo portafolio.",
+      "Configuración → Personas → sumar a Toribio con acceso parcial, para ayudar sin pasar contraseñas."]],
+    ["TikTok","Ella, en el celular · 5 min",null,[
+      "Perfil → menú → Configuración → Cuenta → Cambiar a cuenta de empresa. Categoría: Tiendas.",
+      "Sitio en la bio (si todavía no deja, \"Juncal 1267, Recoleta\" y el WhatsApp en texto).",
+      "Misma foto y mismo nombre que en Instagram."]],
+    ["Metricool y su conector","Ella, con Toribio · 15 min","Metricool es la herramienta que publica y mide. El bot le da las órdenes a través del conector.",[
+      "Crear la cuenta en metricool.com con su mail (plan gratis para arrancar). Marca: \"Les Enfants\".",
+      "Conectar Instagram, TikTok, Facebook y la ficha de Google.",
+      "En Claude: Configuración → Conectores → Explorar → Metricool → Conectar → iniciar sesión.",
+      "En un chat del Proyecto, activar Metricool desde el menú de herramientas.",
+      "Prueba: \"programá el posteo Cómo comprar como borrador para mañana\" y ver que aparezca en Metricool. Probar si acepta la imagen subida al chat; si no, se sube la imagen en Metricool y el bot completa el resto.",
+      "Mirar en la página de Metricool cuántas publicaciones permite el plan gratis. Con 4 por semana en 3 redes puede quedar corto."]],
+    ["Canva (opcional)","Toribio · 30 min, puede ser otro día","Canva Pro no hace falta: el bot ya arma las placas. Sirve si ella quiere retocarlas a mano: guarda los colores, las letras y el logo (kit de marca), quita fondos de fotos con un toque, adapta una pieza a todos los tamaños y deja que el bot rellene plantillas propias desde Claude.",[
+      "Si tiene Canva Pro: Configuración → Conectores → Canva → Conectar con su cuenta.",
+      "Kit de marca: colores #0e6361, #d8eee3, #c2a24d, #14142b; letras Bodoni Moda (o Playfair Display) y Figtree; logo del osito.",
+      "Armar 3 plantillas con nuestro diseño: carrusel 1080×1350, historia 1080×1920 y portada de reel, con el octágono y el osito."]],
+    ["Primera charla con el bot","Ella · 25 min",null,[
+      "En el Proyecto, escribir \"Arranquemos\". El bot le hace la entrevista (puede contestar con audios).",
+      "Descargar la ficha que arma y subirla a los Archivos del Proyecto como 06-ficha-de-la-duena.md.",
+      "Pasarle la ficha a Toribio, que corrige el archivo 01 con los datos confirmados (WhatsApp, horario, cuotas).",
+      "Pedirle \"armá el plan de la quincena\" y \"carrusel de regalos para la seño\" para ver las placas."]],
+    ["Capacitación y cierre","Juntos · 15 min",null,[
+      "Repasar las 8 frases de \"Cómo se usa\" (mandárselas por WhatsApp).",
+      "Hacer juntos una pieza real de punta a punta: filmar 3 clips en el local → \"Tengo este video\" → editar en Edits → \"Programalo\".",
+      "Acordar un día fijo cada 15 días para revisar números y plan (20 minutos).",
+      "Nadie se queda con contraseñas: el acceso de Toribio es por Meta Business Suite."]]
+  ];
+  var KEY="le-guia-install", saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){saved={}}
+  var root=document.getElementById("steps"), total=0;
+  STEPS.forEach(function(s,i){
+    var d=document.createElement("details"); d.className="step"; if(i===0) d.open=true;
+    var sum=document.createElement("summary");
+    sum.innerHTML='<span class="n">'+(i+1)+'</span><span><h3></h3><span class="who"></span></span><span class="chev" aria-hidden="true">+</span>';
+    sum.querySelector("h3").textContent=s[0]; sum.querySelector(".who").textContent=s[1];
+    d.appendChild(sum);
+    var body=document.createElement("div"); body.className="body";
+    if(s[2]){var w=document.createElement("p");w.className="why";w.textContent=s[2];body.appendChild(w)}
+    s[3].forEach(function(t,j){
+      var id="s"+(i+1)+"-"+(j+1); total++;
+      var l=document.createElement("label"); l.className="check";
+      var c=document.createElement("input"); c.type="checkbox"; c.dataset.id=id; c.checked=!!saved[id];
+      var sp=document.createElement("span"); sp.textContent=t;
+      l.appendChild(c); l.appendChild(sp); body.appendChild(l);
+    });
+    d.appendChild(body); root.appendChild(d);
+  });
+  function update(){
+    var boxes=root.querySelectorAll("input"), n=0;
+    boxes.forEach(function(b){ if(b.checked) n++ });
+    document.getElementById("count").textContent=n+" de "+total;
+    document.getElementById("bar").style.width=(total?n/total*100:0)+"%";
+    root.querySelectorAll(".step").forEach(function(st){
+      var bs=st.querySelectorAll("input"), all=bs.length>0;
+      bs.forEach(function(b){ if(!b.checked) all=false });
+      st.classList.toggle("done",all);
+    });
+  }
+  root.addEventListener("change",function(e){
+    if(!e.target.dataset.id) return;
+    saved[e.target.dataset.id]=e.target.checked;
+    try{localStorage.setItem(KEY,JSON.stringify(saved))}catch(err){}
+    update();
+  });
+  document.getElementById("reset").addEventListener("click",function(){
+    saved={}; try{localStorage.removeItem(KEY)}catch(err){}
+    root.querySelectorAll("input").forEach(function(b){b.checked=false}); update();
+  });
+  update();
+})();
+</script>
+</body>
+</html>
