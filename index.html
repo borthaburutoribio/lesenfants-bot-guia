@@ -138,7 +138,11 @@ footer a{color:var(--butter)}
   .step summary{grid-template-columns:40px 1fr auto;padding:16px}
   .step .n{width:40px;height:40px;font-size:19px}
   .step .body{padding:0 16px 18px}
-  table{font-size:15px}th,td{padding:11px 10px}
+  table,tbody,tr,td{display:block;width:100%}
+  thead{display:none}
+  tr{padding:12px 14px;border-bottom:1px solid var(--line)}
+  td{border:0;padding:2px 0}
+  td.pct{font-size:20px;margin:4px 0}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar i,.step .chev{transition:none}}
 </style>
